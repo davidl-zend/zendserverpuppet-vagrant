@@ -4,18 +4,18 @@
 class zstestbox {
   class {'::zendserver': }
 
-  #Get the mtrig sanity Zend Server app
-  file {'/tmp/mtrig.zpk':
+  #Get the demo sanity Zend Server app
+  file {'/tmp/demo.zpk':
     ensure => present,
-    source => "puppet:///modules/${module_name}/mtrig.zpk",
+    source => "puppet:///modules/${module_name}/demo.zpk",
   }
 
-  #Deploy the mtrig Zend Server sanity app
-  zendserver::application { 'sanity':
+  #Deploy the demo Zend Server sanity app
+  zendserver::application { 'demo':
     ensure        => 'deployed',
-    app_package   => '/tmp/mtrig.zpk',
+    app_package   => '/tmp/demo.zpk',
     require       => [Zendserver::Sdk::Target['localadmin'],
-                      File['/tmp/mtrig.zpk']],
+                      File['/tmp/demo.zpk']],
   }
 
   #Add the localadmin sdk target - get parameters from facter
